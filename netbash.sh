@@ -35,7 +35,7 @@ exit 0
   echo -e "|_|  |__||_______|  |___|  |_______||__| |__||_______||__| |__|"
   echo -e "${RESET}                                                   "
 
-  echo -e "${PINK}~Version 1.2~${RESET}"  "${CYAN}~By Pylon~${RESET}" 
+  echo -e "${PINK}~Version 1.3~${RESET}"  "${CYAN}~By Pylon~${RESET}" 
 
 #Ctrl + c 
 
@@ -98,7 +98,7 @@ echo
       read -p "${RED}[${RESET}${ORANGE}!${RESET}${RED}]${RESET}${BLUE} Enter the target IP: ${RESET}" IP
       echo -e "${GREEN}Scanning ...${RESET}"
       sudo nmap -p- --open -n -Pn -sS --min-rate 5000 -vvv $IP -oN nmap_$IP.txt 
-      echo -e "\n ${GREEN}[+] Scan save in ${RESET}${ORANGE}nmap_$IP.txt${RESET}"
+      echo -e "\n ${GREEN}[+] Scan saved in ${RESET}${ORANGE}nmap_$IP.txt${RESET}"
       exit 0
     fi
 
@@ -121,7 +121,7 @@ echo
       read -p "${PINK}[!]${RESET}${BLUE} SET PORTS: ${RESET}" ports
       echo -e "\n${GREEN}[+] Scanning ...${RESET}"
       sudo nmap -p$ports -sCV $IP -oN nmap_service_scan_$IP.txt
-      echo -e "\n ${GREEN}[+] Scan save in ${RESET}${ORANGE}nmap_service_scan_$IP.txt${RESET}"
+      echo -e "\n ${GREEN}[+] Scan saved in ${RESET}${ORANGE}nmap_service_scan_$IP.txt${RESET}"
       exit 0
     fi
 
@@ -145,7 +145,7 @@ echo
      echo ""
      echo -e "${GREEN}[+] Scanning ...${RESET}"
      sudo nmap -p- --open -sCVS --min-rate 5000 -n -vvv -Pn $IP -oN nmap_fullscan_$IP.txt
-     echo -e "\n ${GREEN}[+] Scan save in ${RESET}${ORANGE}nmap_fullscan_$IP.txt${RESET}"
+     echo -e "\n ${GREEN}[+] Scan saved in ${RESET}${ORANGE}nmap_fullscan_$IP.txt${RESET}"
      exit 0 
    fi
 
