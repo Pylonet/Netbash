@@ -2,7 +2,6 @@
 Netbash is an automated bash tool that will help the user to enumerate systems, where you can do Host Discovery, Port Scanning and much more!!
 
 # Usage
-
 When you run the tool you can see the following:
 
 ![](img/1.png)
