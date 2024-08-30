@@ -18,6 +18,7 @@ Use: $0 [options]
 Options:
   --help        More info.
   --netscan     Nmap scan, Host Discovery.
+  --creator     Info from the creator
 
 ${RESET}
 EOF
@@ -34,7 +35,7 @@ exit 0
   echo -e "|_|  |__||_______|  |___|  |_______||__| |__||_______||__| |__|"
   echo -e "${RESET}                                                   "
 
-  echo -e "${PINK}Version 1.0${RESET}"  "${CYAN}By Pylon${RESET}" 
+  echo -e "${PINK}~Version 1.2~${RESET}"  "${CYAN}~By Pylon~${RESET}" 
 
 #Ctrl + c 
 
@@ -218,11 +219,20 @@ Options:
   --help        More info.
   --netscan:     Nmap scan, Host Discovery. ${RESET}
 ${ORANGE}
-       1) Ports Scan (nmap)
-       2) Scan Services+Versions (nmap)
-       3) Full nmap scan (nmap)
-       4) Host Discovery (arp-scan)
+
 ${RESET}
+EOF
+exit 0
+}
+
+
+function creator() {
+echo ""
+    cat << EOF
+${BLUE}Youtube:${RESET}${ORANGE} https://www.youtube.com/@Pylonet${RESET}
+${BLUE}Blog:${RESET}${ORANGE} https://pylonet.pages.dev/${RESET}
+
+${PINK}Ty for using ${GREEN}Netbash${RESET} <3${RESET}
 EOF
 exit 0
 }
@@ -237,7 +247,11 @@ while [[ $# -gt 0 ]]; do
             help
             shift
             ;;
-
+        --creator)
+            creator
+            shift
+            ;;
+            
     esac
 done
 
