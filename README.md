@@ -27,3 +27,7 @@ Selecting the first one will ask for the IP of the target:
 And it will perform a basic nmap scan but with some parameter optimizations that come with nmap:
 
 ![](img/5.png)
+
+and if you want to save the scan to a file:
+
+![](img/6.png)
