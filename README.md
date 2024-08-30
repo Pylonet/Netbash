@@ -1,4 +1,4 @@
-# NetBash ![Static Badge](https://img.shields.io/badge/Docker-Version%201.3-brightgreen?logo=gnubash&logoColor=white&color=blue)
+# NetBash ![Static Badge](https://img.shields.io/badge/Bash-Version%201.3-brightgreen?logo=gnubash&logoColor=white&color=blue)
 Netbash is an automated bash tool that will help the user to enumerate systems, where you can do Host Discovery, Port Scanning and much more!!
 
 # Usage
