@@ -6,6 +6,7 @@ Netbash is an automated bash tool that will help the user to enumerate systems, 
 When you run the tool you can see the following:
 
 ![](img/1.png)
+
 You have two functional parameters, the only functional tool is **Netscan**.
 
 ## NetScan (Tested in ![Static Badge](https://img.shields.io/badge/build-6.8.11%20amd64-brightgreen?logo=kalilinux&logoColor=white&label=Kali%20Linux&color=blue))
