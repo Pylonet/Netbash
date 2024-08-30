@@ -6,11 +6,6 @@ ORANGE="$(printf '\033[33m')"
 BLUE="$(printf '\033[34m')"
 PINK="$(printf '\033[35m')"
 CYAN="$(printf '\033[36m')"
-ROJOBG="$(printf '\033[41m')"
-GREENBG="$(printf '\033[42m')"
-BLUEBG="$(printf '\033[44m')"
-PINKBG="$(printf '\033[45m')"
-CYANBG="$(printf '\033[46m')"
 RESET="$(printf '\e[0m')"
 
 clear
