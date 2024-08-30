@@ -89,7 +89,7 @@ echo -e "\n${ORANGE}[4]Host Discovery (arp-scan) ${RESET}"
 echo -e "\n${ORANGE}[5]Options ${RESET}"
 echo -e "\n${ORANGE}[6]Exit${RESET}\n"
 
-read -p "${BLUE}How do you want the scan?: ${RESET}" option
+read -p "${BLUE}How do you want the scan?: ${RESET}" option param
 echo 
 
   if [ "$option" == "1" ]; then
@@ -98,6 +98,14 @@ echo
       sudo apt install -y nmap &>/dev/null & INSTALL_PID=$!
       loading_dots $!
     fi
+    if [ "$param" == "--save" ]; then
+      read -p "${RED}[${RESET}${ORANGE}!${RESET}${RED}]${RESET}${BLUE} Enter the target IP: ${RESET}" IP
+      echo -e "${GREEN}Scanning ...${RESET}"
+      sudo nmap -p- --open -n -Pn -sS --min-rate 5000 -vvv $IP -oN nmap_$IP.txt 
+      echo -e "\n ${GREEN}[+] Scan save in ${RESET}${ORANGE}nmap_$IP.txt${RESET}"
+      exit 0
+    fi
+
     read -p "${RED}[${RESET}${ORANGE}!${RESET}${RED}]${RESET}${BLUE} Enter the target IP: ${RESET}" IP
     echo -e "${GREEN}Scanning ...${RESET}"
     sudo nmap -p- --open -n -Pn -sS --min-rate 5000 -vvv $IP
@@ -110,6 +118,17 @@ echo
       sudo apt install -y nmap &>/dev/null & INSTALL_PID=$!
       loading_dots $!
     fi
+
+    if [ "$param" == "--save" ]; then
+      read -p "${RED}[${RESET}${ORANGE}!${RESET}${RED}]${RESET}${BLUE} Enter the target IP: ${RESET}" IP
+      echo -e ""
+      read -p "${PINK}[!]${RESET}${BLUE} SET PORTS: ${RESET}" ports
+      echo -e "\n${GREEN}[+] Scanning ...${RESET}"
+      sudo nmap -p$ports -sCV $IP -oN nmap_service_scan_$IP.txt
+      echo -e "\n ${GREEN}[+] Scan save in ${RESET}${ORANGE}nmap_service_scan_$IP.txt${RESET}"
+      exit 0
+    fi
+
     read -p "${RED}[${RESET}${ORANGE}!${RESET}${RED}]${RESET}${BLUE} Enter the target IP: ${RESET}" IP
     echo -e ""
     read -p "${PINK}[!]${RESET}${BLUE} SET PORTS: ${RESET}" ports
@@ -124,6 +143,16 @@ echo
       sudo apt install -y nmap &>/dev/null & INSTALL_PID=$!
       loading_dots $!
     fi
+
+    if [ "$param" == "--save" ]; then
+     read -p "${RED}[${RESET}${ORANGE}!${RESET}${RED}]${RESET}${BLUE} Enter the target IP: ${RESET}" IP
+     echo ""
+     echo -e "${GREEN}[+] Scanning ...${RESET}"
+     sudo nmap -p- --open -sCVS --min-rate 5000 -n -vvv -Pn $IP -oN nmap_fullscan_$IP.txt
+     echo -e "\n ${GREEN}[+] Scan save in ${RESET}${ORANGE}nmap_fullscan_$IP.txt${RESET}"
+     exit 0 
+   fi
+
     read -p "${RED}[${RESET}${ORANGE}!${RESET}${RED}]${RESET}${BLUE} Enter the target IP: ${RESET}" IP
     echo ""
     echo -e "${GREEN}[+] Scanning ...${RESET}"
@@ -158,7 +187,7 @@ echo
     Use: number [options]
 
     Options:
-        --save (not working):     Save in a .txt file the scan.
+        --save (only aviable in nmap scans):     Save in a .txt file the scan.
     
               Example:
               How do you want the scan?: 3 --save
@@ -173,7 +202,6 @@ read -p "${ORANGE} Back? (Yes/No): " input
     options
   fi
 }
-
 
 if [ "$option" == "5" ]; then
   options
