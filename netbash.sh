@@ -85,34 +85,49 @@ fi
 echo -e "\n${ORANGE}[1]Simple scan ${RESET}"
 echo -e "\n${ORANGE}[2]Scan Services+Versions(Need Ports)${RESET}"
 echo -e "\n${ORANGE}[3]Full Nmap Scan (Recommended) ${RESET}"
-echo -e "\n${ORANGE}[4]Host Discovery ${RESET}"
+echo -e "\n${ORANGE}[4]Host Discovery (arp-scan) ${RESET}"
 echo -e "\n${ORANGE}[5]Options ${RESET}"
 echo -e "\n${ORANGE}[6]Exit${RESET}\n"
 
-read -p "${BLUE}How do you want the scan?: ${RESET}" option param
+read -p "${BLUE}How do you want the scan?: ${RESET}" option
 echo 
 
   if [ "$option" == "1" ]; then
+    if ! command -v nmap &> /dev/null; then
+      echo -e "${RED}[!]${RESET}${BLUE} NMAP NOT INSTALLED${RESET}"
+      sudo apt install -y nmap &>/dev/null & INSTALL_PID=$!
+      loading_dots $!
+    fi
     read -p "${RED}[${RESET}${ORANGE}!${RESET}${RED}]${RESET}${BLUE} Enter the target IP: ${RESET}" IP
     echo -e "${GREEN}Scanning ...${RESET}"
-    nmap -p- --open -n -Pn -sS --min-rate 5000 -vvv $IP
+    sudo nmap -p- --open -n -Pn -sS --min-rate 5000 -vvv $IP
     exit 0
   fi
 
   if [ "$option" == "2" ]; then
+    if ! command -v nmap &> /dev/null; then
+      echo -e "${RED}[!]${RESET}${BLUE} NMAP NOT INSTALLED${RESET}"
+      sudo apt install -y nmap &>/dev/null & INSTALL_PID=$!
+      loading_dots $!
+    fi
     read -p "${RED}[${RESET}${ORANGE}!${RESET}${RED}]${RESET}${BLUE} Enter the target IP: ${RESET}" IP
     echo -e ""
     read -p "${PINK}[!]${RESET}${BLUE} SET PORTS: ${RESET}" ports
     echo -e "\n${GREEN}[+] Scanning ...${RESET}"
-    nmap -p$ports -sCV $IP
+    sudo nmap -p$ports -sCV $IP
     exit 0
   fi
 
   if [ "$option" == "3" ]; then
+    if ! command -v nmap &> /dev/null; then
+      echo -e "${RED}[!]${RESET}${BLUE} NMAP NOT INSTALLED${RESET}"
+      sudo apt install -y nmap &>/dev/null & INSTALL_PID=$!
+      loading_dots $!
+    fi
     read -p "${RED}[${RESET}${ORANGE}!${RESET}${RED}]${RESET}${BLUE} Enter the target IP: ${RESET}" IP
     echo ""
     echo -e "${GREEN}[+] Scanning ...${RESET}"
-    nmap -p- --open -sCVS --min-rate 5000 -n -vvv -Pn $IP 
+    sudo nmap -p- --open -sCVS --min-rate 5000 -n -vvv -Pn $IP 
     exit 0 
   fi
 
