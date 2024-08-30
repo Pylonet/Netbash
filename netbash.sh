@@ -54,7 +54,7 @@ trap ctrl+c INT
 function loading_dots() {
     local pid=$1
     local delay=0.5
-    local spin='.-'
+    local spin='./'
     while ps -p $pid > /dev/null; do
         for ((i = 0; i < ${#spin}; i++)); do
             printf "\r%s" "${spin:$i:1}"
@@ -78,17 +78,18 @@ echo -e "${GREEN} |_| \\_|______|  |_| |_____/ \\_____/ /    \\_\\_| \\_|${RESET
 echo -e "${GREEN}                                                    ${RESET}"
 
 if [ "$(whoami)" != "root" ]; then
-    echo -e "\n${ORANGE}[!]${RESET}${RED} YOU ${ORANGE}NEED${RESET} ${RED}TO BE${RESET} ${ORANGE}ROOT${RESET} ${RED}TO USE NETSCAN${RESET}"
+    echo -e "\n${ORANGE}[!]${RESET}${RED} YOU ${RESET}${RED}NEED${RESET} ${RED}TO BE${RESET} ${ORANGE}ROOT${RESET} ${RED}TO USE ${GREEN}NETSCAN${RESET}"
     exit 1
 fi
 
-echo -e "\n${ORANGE}[1]Ports scan ${RESET}"
+echo -e "\n${ORANGE}[1]Simple scan ${RESET}"
 echo -e "\n${ORANGE}[2]Scan Services+Versions(Need Ports)${RESET}"
 echo -e "\n${ORANGE}[3]Full Nmap Scan (Recommended) ${RESET}"
 echo -e "\n${ORANGE}[4]Host Discovery ${RESET}"
-echo -e "\n${ORANGE}[5]Exit${RESET}\n"
+echo -e "\n${ORANGE}[5]Options ${RESET}"
+echo -e "\n${ORANGE}[6]Exit${RESET}\n"
 
-read -p "${BLUE}How do you want the scan?: ${RESET}" option
+read -p "${BLUE}How do you want the scan?: ${RESET}" option param
 echo 
 
   if [ "$option" == "1" ]; then
@@ -124,14 +125,50 @@ echo
     echo ""
     read -p "${PINK}[!]${RESET}${BLUE} NETWORK INTERFACE: ${RESET}" interface
     echo -e "\n${GREEN}[+] Discovering ...${RESET}\n"
-    arp-scan -I $interface --localnet
+    sudo arp-scan -I $interface --localnet
     exit 0
   fi
 
-  if [ "$option" == "5" ]; then
+  function options() {
+    clear
+    echo -e "${GREEN}   ____  _____ _______ _____ ____  _   _  _____ ${RESET}"
+    echo -e "${GREEN}  / __ \|  __ \__   __|_   _/ __ \| \ | |/ ____|${RESET}"
+    echo -e "${GREEN} | |  | | |__) | | |    | || |  | |  \| | (___  ${RESET}"
+    echo -e "${GREEN} | |  | |  ___/  | |    | || |  | | . \` |\\___ \ ${RESET}"
+    echo -e "${GREEN} | |__| | |      | |   _| || |__| | |\  |____) |${RESET}"
+    echo -e "${GREEN}  \____/|_|      |_|  |_____\____/|_| \_|_____/ ${RESET}"
+    echo -e "${GREEN}                                                ${RESET}"
+    cat << EOF
+  ${BLUE}
+    Use: number [options]
+
+    Options:
+        --save (not working):     Save in a .txt file the scan.
+    
+              Example:
+              How do you want the scan?: 3 --save
+
+  ${RESET}
+EOF
+read -p "${ORANGE} Back? (Yes/No): " input
+
+  if [ "$input" == "Yes" ]; then
+    netscan
+  else 
+    options
+  fi
+}
+
+
+if [ "$option" == "5" ]; then
+  options
+fi
+
+  if [ "$option" == "6" ]; then
     echo -e "\n${RED}[!] EXIT...${RESET}\n"
     exit 1
-  fi
+  fi 
+
 }
 
 function help() {
