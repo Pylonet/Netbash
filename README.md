@@ -32,4 +32,15 @@ and if you want to save the scan to a file:
 
 ![](img/6.png)
 
-Under developmen...
+![](img/7.png)
+
+### Scan services and versions
+
+You can also do a specific scan of ports that you are interested in knowing more about:
+
+![](img/8.png)
+
+### Full Scan
+The full scan is a combination of 1 and 2:
+
+![](img/9.png)
